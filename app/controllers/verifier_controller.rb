@@ -4,6 +4,7 @@ require "rqrcode"
 
 class VerifierController < ApplicationController
   before_action :authenticate_api_key!
+  skip_before_action :verify_authenticity_token, only: [:create_proof_request]
 
   UNAUTHORIZED_ERROR = "Unauthorized access!".freeze
   CONNECTION_ERROR = "Connection error!".freeze
