@@ -6,7 +6,14 @@ class DecodeTokenService < ApplicationService
   attr_accessor :token
 
   def run
-    decoded = JWT.decode(token, Rails.application.credentials.secret_key_base)
-    decoded[0]["thread_id"]
+    return nil if token.blank?
+
+    secret = ENV["API_KEY"]
+    begin
+      decoded = JWT.decode(token, secret)
+      decoded[0]['thread_id']
+    rescue JWT::DecodeError, TypeError
+      nil
+    end
   end
 end
