@@ -14,13 +14,15 @@ class VerifiableCredentialsController < ApplicationController
   end
 
   def fetch
+    return render json: { error: "Missing or empty token" }, status: :bad_request if params[:token].blank?
+
     threaded_id = decode_token(params[:token])
     return render json: { error: "Invalid or expired token" }, status: :unauthorized unless threaded_id
 
     vc = VerifiableCredential.find_by(threaded_id: threaded_id)
     return render json: { error: "Verifiable Credential not found" }, status: :not_found unless vc
 
-    render json: vc, serializer: VerifiableCredentialSerializer
+    render json: vc, serializer: VerifiableCredentialSerializer, status: :ok
   end
 
   private
