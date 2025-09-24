@@ -69,7 +69,8 @@ class CreateProofRequestService < ApplicationService
       "Current Address" => ENV["CURRENT_ADDRESS_SCHEMA_ID"],
       "Mobile Number" => ENV["MOBILE_NUMBER_SCHEMA_ID"],
       "Email" => ENV["EMAIL_SCHEMA_ID"],
-      "Passport-Size Photo" => ENV["PASSPORT_SIZE_PHOTO_SCHEMA_ID"]
+      "Passport-Size Photo" => ENV["PASSPORT_SIZE_PHOTO_SCHEMA_ID"],
+      "E-Signature" => ENV["E_SIGNATURE_SCHEMA_ID"]
     }[attribute_type]
   end
 
