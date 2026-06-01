@@ -32,7 +32,7 @@ class VerifierController < ApplicationController
   end
 
   def create_proof_request_service
-    CreateProofRequestService.new(redis: REDIS, attributes: permit_attributes).run
+    CreateProofRequestService.new(redis: REDIS, attributes: permit_attributes, purpose: params[:purpose]).run
   end
 
   def subscribe_webhook_service(data)

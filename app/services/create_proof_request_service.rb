@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CreateProofRequestService < ApplicationService
-  attr_accessor :redis, :attributes
+  attr_accessor :redis, :attributes, :purpose
 
   MAX_RETRIES = 3
   RETRY_DELAY = 2
@@ -41,7 +41,8 @@ class CreateProofRequestService < ApplicationService
   def body
     {
       proofName: "Verify Foundational ID",
-      proofAttributes: format_proof_attributes
+      proofAttributes: format_proof_attributes,
+      purpose: purpose
     }
   end
 
