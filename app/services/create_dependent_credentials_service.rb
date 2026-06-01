@@ -14,6 +14,7 @@ class CreateDependentCredentialsService < ApplicationService
     create_email(self_attested_attrs)
     create_mobile_number(self_attested_attrs)
     create_passport_photo(self_attested_attrs)
+    create_e_signature(self_attested_attrs)
   end
 
   private
@@ -79,6 +80,15 @@ class CreateDependentCredentialsService < ApplicationService
 
     PassportSizePhoto.create(
       passport_size_photo: data["passport-size_photo"],
+      verifiable_credential_id: vc_id
+    )
+  end
+
+  def create_e_signature(data)
+    return unless data["e-signature"]
+
+    ESignature.create(
+      e_signature: data["e-signature"],
       verifiable_credential_id: vc_id
     )
   end
